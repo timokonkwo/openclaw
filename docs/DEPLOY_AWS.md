@@ -21,6 +21,10 @@ This guide outlines how to deploy your OpenClaw agent on an AWS EC2 instance usi
      - *Why:* Mance uses "Long Polling" by default. He reaches out to Telegram; Telegram does not need to reach in. You do not need an SSL certificate or open ports.
 8. **Storage:** Set to 30GB gp3 (Free tier limit).
 9. **Launch Instance**.
+10. **Get your IP:**
+    - Click **View all instances**.
+    - Select your new `OpenClaw-Mance` instance.
+    - Look for **Public IPv4 address** in the details pane (e.g., `54.123.45.67`). **This is the IP you need.**
 
 ## Step 2: Connect to Instance (From your Mac)
 Open your terminal and SSH into the instance. **Once you run this command, your terminal is controlling the AWS server, not your Mac.**
@@ -64,9 +68,13 @@ The easiest way to run OpenClaw is via Docker.
    *Paste the contents of your local `.env` file here. (Right-click to paste).*
    *Press `Ctrl+X`, then `Y`, then `Enter` to save.*
 3. **Build & Run with Docker Compose:**
+   
+   *Note: If you are updating an existing setup, run `git pull` first.*
+
    ```bash
-   docker compose up -d --build
+   docker-compose up -d --build
    ```
+   *(If `docker-compose` is not found, try `docker compose up -d --build`)*
 
 ### Option B: Manual Node.js Setup (Conserves Resources)
 If Docker is too heavy for the micro instance:
