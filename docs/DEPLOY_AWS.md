@@ -22,14 +22,15 @@ This guide outlines how to deploy your OpenClaw agent on an AWS EC2 instance usi
 8. **Storage:** Set to 30GB gp3 (Free tier limit).
 9. **Launch Instance**.
 
-## Step 2: Connect to Instance
-Open your terminal and SSH into the instance:
+## Step 2: Connect to Instance (From your Mac)
+Open your terminal and SSH into the instance. **Once you run this command, your terminal is controlling the AWS server, not your Mac.**
+
 ```bash
 chmod 400 your-key.pem
 ssh -i "your-key.pem" ubuntu@<public-ip-address>
 ```
 
-## Step 3: Install Dependencies (Docker Method)
+## Step 3: Install Dependencies (On the AWS Server)
 The easiest way to run OpenClaw is via Docker.
 
 1. **Update System:**
@@ -41,16 +42,18 @@ The easiest way to run OpenClaw is via Docker.
    sudo apt install -y docker.io
    sudo systemctl start docker
    sudo systemctl enable docker
-   sudo usermod -aG docker newuser # Optional: run docker without sudo
-   # You may need to logout and login again for group changes to take effect
+   # Add ubuntu user to docker group so you don't need sudo for docker commands
+   sudo usermod -aG docker ubuntu
+   # Refresh group membership
+   newgrp docker
    ```
 
-## Step 4: Deploy OpenClaw
+## Step 4: Deploy OpenClaw (On the AWS Server)
 
 ### Option A: Clone & Build
 1. **Clone your repo:**
    ```bash
-   git clone https://github.com/your-repo/openclaw.git
+   git clone https://github.com/timokonkwo/openclaw.git
    cd openclaw
    ```
 2. **Configure Environment:**
@@ -58,7 +61,8 @@ The easiest way to run OpenClaw is via Docker.
    ```bash
    nano .env
    ```
-   *Paste your keys (Telegram Token, Anthropic Key, etc.) here.*
+   *Paste the contents of your local `.env` file here. (Right-click to paste).*
+   *Press `Ctrl+X`, then `Y`, then `Enter` to save.*
 3. **Build & Run with Docker Compose:**
    ```bash
    docker compose up -d --build
