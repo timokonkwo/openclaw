@@ -29,7 +29,13 @@ Mance uses `himalaya` to manage emails.
    ```bash
    himalaya account configure
    ```
+   ```
    *Follow the prompts to set up IMAP/SMTP credentials.*
+
+   **Best Practice: Email Identity**
+   - **Recommended:** Use a subdomain or alias like `mance@sales.luxenlabs.com` or `mance@luxenlabs.com`.
+   - **Why:** This separates the bot's automated outreach from your main domain (`info@luxenlabs.com`), protecting your primary domain's reputation from spam filters during cold outreach.
+
 
 ### Location & Places (GoPlaces)
 Allows Mance to find places (restaurants, client offices).

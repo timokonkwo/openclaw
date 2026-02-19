@@ -22,7 +22,7 @@
         "delivery": {
           "mode": "announce",
           "channel": "telegram",
-          "to": "YOUR_TELEGRAM_CHAT_ID:topic:YOUR_TOPIC_ID"
+          "to": "-1002299495325:topic:2922"
         }
       },
       {
@@ -40,7 +40,7 @@
         "delivery": {
           "mode": "announce",
           "channel": "telegram",
-          "to": "YOUR_TELEGRAM_CHAT_ID"
+          "to": "-1002299495325"
         }
       }
     ]

@@ -14,10 +14,12 @@ This guide outlines how to deploy your OpenClaw agent on an AWS EC2 instance usi
 4. **OS Image:** Ubuntu Server 24.04 LTS (Free tier eligible).
 5. **Instance Type:** `t3.micro` (or `t2.micro` if t3 is unavailable in your region).
 6. **Key Pair:** Create new or select existing (save the `.pem` file!).
-7. **Network Settings:**
-   - Allow SSH traffic from "My IP" (for security) or "Anywhere".
-   - Allow HTTP/HTTPS traffic (optional, if using webhooks).
-8. **Storage:** Set to 20-30GB gp3 (Free tier allows up to 30GB).
+7. **Network Settings (Security Group):**
+   - **SSH (Port 22):** Set to `Anywhere (0.0.0.0/0)`.
+     - *Why:* Since your IP changes (VPN), setting this to "My IP" will lock you out when you reconnect. AWS Key Pairs are secure enough to handle this exposure.
+   - **HTTP/HTTPS (Ports 80/443):** **DO NOT ADD**.
+     - *Why:* Mance uses "Long Polling" by default. He reaches out to Telegram; Telegram does not need to reach in. You do not need an SSL certificate or open ports.
+8. **Storage:** Set to 30GB gp3 (Free tier limit).
 9. **Launch Instance**.
 
 ## Step 2: Connect to Instance
