@@ -1,0 +1,51 @@
+{
+  "agent": {
+    "name": "Mance",
+    "model": "anthropic/claude-3-5-sonnet-20241022",
+    "thinking": "low"
+  },
+  "cron": {
+    "enabled": true,
+    "jobs": [
+      {
+        "name": "daily-standup",
+        "schedule": {
+          "kind": "cron",
+          "expr": "0 9 * * 1-5",
+          "tz": "Africa/Lagos"
+        },
+        "sessionTarget": "isolated",
+        "payload": {
+          "kind": "agentTurn",
+          "message": "It is 9am WAT. Initiate the daily standup in the 'Daily Standup' topic. Tag everyone. Ask for updates. Roast anyone who is late or vague."
+        },
+        "delivery": {
+          "mode": "announce",
+          "channel": "telegram",
+          "to": "YOUR_TELEGRAM_CHAT_ID:topic:YOUR_TOPIC_ID"
+        }
+      },
+      {
+        "name": "weekly-meeting",
+        "schedule": {
+          "kind": "cron",
+          "expr": "0 20 * * 4",
+          "tz": "Africa/Lagos"
+        },
+        "sessionTarget": "isolated",
+        "payload": {
+          "kind": "agentTurn",
+          "message": "It is 8pm WAT on Thursday. Remind everyone about the Weekly Meeting on Google Meet. Share the link."
+        },
+        "delivery": {
+          "mode": "announce",
+          "channel": "telegram",
+          "to": "YOUR_TELEGRAM_CHAT_ID"
+        }
+      }
+    ]
+  },
+  "browser": {
+    "enabled": true
+  }
+}
